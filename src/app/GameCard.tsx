@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { format } from 'date-fns';
 
-import * as Logos from 'react-nba-logos';
+import * as Logos from '../components/Logos';
 
 import { Game } from '../domains/nba';
 
