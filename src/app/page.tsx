@@ -8,11 +8,8 @@ import { api } from '../services/api';
 
 import { GameCard } from './GameCard';
 
-const getGames = cache(
-  async (page = 1) =>
-    await api<NBAResponse<Game[]>>(
-      `/games?page=${page}&per_page=25&seasons[]=2022`
-    )
+const getGames = cache((page = 1) =>
+  api<NBAResponse<Game[]>>(`/games?page=${page}&per_page=25&seasons[]=2022`),
 );
 
 export default function Page() {
@@ -21,17 +18,17 @@ export default function Page() {
   const games = use(getGames(page));
 
   const nextPage = () => {
-    setPage((state) => state + 1);
+    setPage(state => state + 1);
   };
 
   const previousPage = () => {
-    setPage((state) => state - 1);
+    setPage(state => state - 1);
   };
 
   return (
     <div className="py-4 px-6">
-      <div className="flex flex-col max-w-[650px] m-auto border-[1px] border-b-0 border-neutral-700">
-        {games.data.map((game) => (
+      <div className="m-auto flex max-w-[650px] flex-col border-[1px] border-b-0 border-neutral-700">
+        {games.data.map(game => (
           <GameCard key={game.id} game={game} />
         ))}
       </div>
