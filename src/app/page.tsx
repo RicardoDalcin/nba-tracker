@@ -1,42 +1,31 @@
 'use client';
 
-import { cache, use, useState } from 'react';
+import { useState } from 'react';
 
-import { Game, NBAResponse } from '../domains/nba';
+import { getStandings } from '../domains/nba';
 
-import { api } from '../services/api';
-
-import { GameCard } from './GameCard';
-
-const getGames = cache((page = 1) =>
-  api<NBAResponse<Game[]>>(`/games?page=${page}&per_page=25&seasons[]=2022`),
-);
+import { Games } from './Games';
 
 export default function Page() {
-  const [page, setPage] = useState(1);
-
-  const games = use(getGames(page));
-
-  const nextPage = () => {
-    setPage(state => state + 1);
-  };
-
-  const previousPage = () => {
-    setPage(state => state - 1);
-  };
+  const [date, setDate] = useState(new Date());
 
   return (
-    <div className="py-4 px-6">
-      <div className="m-auto flex max-w-[650px] flex-col border-[1px] border-b-0 border-neutral-700">
-        {games.data.map(game => (
-          <GameCard key={game.id} game={game} />
-        ))}
+    <section className="mx-auto flex w-[90%] max-w-[1440px] gap-16">
+      <div className="flex w-[50%] max-w-[650px] flex-col gap-4 py-6">
+        <h2 className="text-2xl font-medium">Games</h2>
+
+        <Games date={date} />
       </div>
 
-      <div>
-        <button onClick={previousPage}>Prev</button>
-        <button onClick={nextPage}>Next</button>
+      <div className="flex flex-col gap-4 py-6">
+        <h2 className="text-2xl font-medium">Standings</h2>
+
+        {getStandings().west.map(team => (
+          <div key={team.abbreviation}>
+            {team.name} | {team.wins} - {team.losses}
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 }

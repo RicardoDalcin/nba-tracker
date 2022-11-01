@@ -44,46 +44,43 @@ const formatGameDate = (date: Date) => format(date, "eee', 'MMM' 'dd', 'yyyy");
 export const GameCard = ({ game }: { game: Game }) => {
   const HomeLogo = useMemo(
     () => LOGOS[game.home_team.abbreviation],
-    [game.home_team.abbreviation]
+    [game.home_team.abbreviation],
   );
 
   const AwayLogo = useMemo(
     () => LOGOS[game.visitor_team.abbreviation],
-    [game.visitor_team.abbreviation]
+    [game.visitor_team.abbreviation],
   );
-
-  const loadGame = () => {};
 
   return (
     <div
       key={game.id}
-      className="flex w-full items-center justify-between border-neutral-700 border-b-[1px] bg-neutral-800"
-      onClick={loadGame}
+      className="flex w-full items-center justify-between border-b-[1px] border-neutral-700 bg-neutral-800"
     >
-      <div className="flex-1 flex flex-col justify-center items-stretch border-r-[1px] border-neutral-700 py-6 px-4">
-        <div className="flex justify-between items-center">
+      <div className="flex flex-1 flex-col items-stretch justify-center border-r-[1px] border-neutral-700 py-6 px-4">
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
             <HomeLogo size={32} />
             <span className="ml-2">{game.home_team.full_name}</span>
           </div>
 
-          <span className="text-2xl font-regular">{game.home_team_score}</span>
+          <span className="font-regular text-2xl">{game.home_team_score}</span>
         </div>
 
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <div className="flex items-center">
             <AwayLogo size={32} />
             <span className="ml-2">{game.visitor_team.full_name}</span>
           </div>
 
-          <span className="text-2xl font-regular">
+          <span className="font-regular text-2xl">
             {game.visitor_team_score}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-col items-center py-6 px-4 min-w-[200px]">
-        <span className="text-2xl font-regular">{game.status}</span>
+      <div className="flex min-w-[200px] flex-col items-center py-6 px-4">
+        <span className="font-regular text-2xl">{game.status}</span>
       </div>
     </div>
   );

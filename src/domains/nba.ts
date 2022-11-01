@@ -75,3 +75,84 @@ export interface Game {
   visitor_team: Team;
   visitor_team_score: number;
 }
+
+interface TeamStats {
+  abbreviation: TeamAbbreviation;
+  name: string;
+  wins: number;
+  losses: number;
+}
+
+export interface Standings {
+  west: TeamStats[];
+  east: TeamStats[];
+}
+
+interface ConferenceTeam {
+  abbreviation: TeamAbbreviation;
+  name: string;
+}
+
+const WESTERN_CONFERENCE: ConferenceTeam[] = [
+  { abbreviation: 'DAL', name: 'Mavericks' },
+  { abbreviation: 'DEN', name: 'Nuggets' },
+  { abbreviation: 'GSW', name: 'Warriors' },
+  { abbreviation: 'HOU', name: 'Rockets' },
+  { abbreviation: 'LAC', name: 'Clippers' },
+  { abbreviation: 'LAL', name: 'Lakers' },
+  { abbreviation: 'MEM', name: 'Grizzlies' },
+  { abbreviation: 'MIN', name: 'Timberwolves' },
+  { abbreviation: 'NOP', name: 'Pelicans' },
+  { abbreviation: 'OKC', name: 'Thunder' },
+  { abbreviation: 'PHX', name: 'Suns' },
+  { abbreviation: 'POR', name: 'Trail Blazers' },
+  { abbreviation: 'SAC', name: 'Kings' },
+  { abbreviation: 'SAS', name: 'Spurs' },
+  { abbreviation: 'UTA', name: 'Jazz' },
+];
+
+const EASTERN_CONFERENCE: ConferenceTeam[] = [
+  { abbreviation: 'ATL', name: 'Hawks' },
+  { abbreviation: 'BOS', name: 'Celtics' },
+  { abbreviation: 'BKN', name: 'Nets' },
+  { abbreviation: 'CHA', name: 'Hornets' },
+  { abbreviation: 'CHI', name: 'Bulls' },
+  { abbreviation: 'CLE', name: 'Cavaliers' },
+  { abbreviation: 'DET', name: 'Pistons' },
+  { abbreviation: 'IND', name: 'Pacers' },
+  { abbreviation: 'MIA', name: 'Heat' },
+  { abbreviation: 'MIL', name: 'Bucks' },
+  { abbreviation: 'NYK', name: 'Knicks' },
+  { abbreviation: 'ORL', name: 'Magic' },
+  { abbreviation: 'PHI', name: '76ers' },
+  { abbreviation: 'TOR', name: 'Raptors' },
+  { abbreviation: 'WAS', name: 'Wizards' },
+];
+
+export function getStandings(): Standings {
+  const west = WESTERN_CONFERENCE.map(({ abbreviation, name }) => {
+    const wins = Math.floor(Math.random() * 50) + 20;
+    const losses = 82 - wins;
+
+    return {
+      abbreviation,
+      name,
+      wins,
+      losses,
+    };
+  }).sort((a, b) => b.wins - a.wins);
+
+  const east = EASTERN_CONFERENCE.map(({ abbreviation, name }) => {
+    const wins = Math.floor(Math.random() * 50) + 20;
+    const losses = 82 - wins;
+
+    return {
+      abbreviation,
+      name,
+      wins,
+      losses,
+    };
+  }).sort((a, b) => b.wins - a.wins);
+
+  return { west, east };
+}
