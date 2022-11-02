@@ -5,7 +5,7 @@ export function api<T>(url: string): Promise<T> {
       'x-rapidapi-host': process.env.NEXT_PUBLIC_API_HOST || '',
       'x-rapidapi-key': process.env.NEXT_PUBLIC_API_KEY || '',
     },
-  }).then((response) => {
+  }).then(response => {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
