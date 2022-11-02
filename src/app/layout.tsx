@@ -1,8 +1,6 @@
-import Image from 'next/image';
-
-import logo from '../../public/logo.svg';
-
 import '../styles/globals.css';
+import '../styles/Calendar.css';
+import '../styles/DatePicker.css';
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -29,7 +27,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
       </head>
       <body>
         <header className="fixed top-0 left-0 h-16 w-full bg-gradient-to-b from-black/50 to-black/0">
-          <div className="mx-auto flex h-full w-full max-w-[1440px] items-center">
+          <div className="mx-auto flex h-full w-[90%] max-w-[1440px] items-center">
             <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logo.svg" alt="NBA Tracker" width={150} />

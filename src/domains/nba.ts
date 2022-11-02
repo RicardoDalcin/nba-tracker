@@ -9,7 +9,7 @@ export interface NBAResponse<T> {
   };
 }
 
-type TeamAbbreviation =
+export type TeamAbbreviation =
   | 'ATL'
   | 'BKN'
   | 'BOS'

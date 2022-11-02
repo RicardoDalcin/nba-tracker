@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Raleway', 'sans-serif'],
-      }
+        secondary: ['sans-serif'],
+      },
     },
   },
   plugins: [],

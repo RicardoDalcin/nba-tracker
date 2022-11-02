@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import { TeamAbbreviation } from '../../domains/nba';
 
 interface LogoProps {
   size?: number;
@@ -1536,6 +1538,53 @@ const WAS: React.FC<LogoProps> = ({ size = DEFAULT_SIZE }) => (
     </g>
   </svg>
 );
+
+const LOGOS = {
+  ATL,
+  BKN,
+  BOS,
+  CHA,
+  CHI,
+  CLE,
+  DAL,
+  DEN,
+  DET,
+  GSW,
+  HOU,
+  IND,
+  LAC,
+  LAL,
+  MEM,
+  MIA,
+  MIL,
+  MIN,
+  NOP,
+  NYK,
+  OKC,
+  ORL,
+  PHI,
+  PHX,
+  POR,
+  SAC,
+  SAS,
+  TOR,
+  UTA,
+  WAS,
+};
+
+const TeamLogo = ({
+  team,
+  size,
+}: {
+  team: TeamAbbreviation;
+  size?: number;
+}) => {
+  const Logo = useMemo(() => LOGOS[team], [team]);
+
+  return <Logo size={size} />;
+};
+
+export default TeamLogo;
 
 export {
   ATL,
